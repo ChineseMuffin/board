@@ -16,15 +16,14 @@ function Display(props) {
   };
 
   function renderAllDot() {
-
+    // TODO listをpropsから取得する
+    const list = [{row: 0, column: 0}, {row: 0, column: 1}, {row: 1, column: 0}, {row: 1, column: 1}];
+    return list.map(e => renderDot(e.column, e.row));
   }
 
   return (
     <g id="display">
-      {renderDot(0, 0)}
-      {renderDot(1, 0)}
-      {renderDot(0, 1)}
-      {renderDot(1, 1)}
+      {renderAllDot()}
     </g>
   );
 }
