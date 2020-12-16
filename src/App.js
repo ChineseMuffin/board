@@ -9,16 +9,18 @@ function Dot(props) {
 
 function Display(props) {
   const sideLength = 100;
+  const columns = 2;
 
-  function renderDot (x, y) {
-    const dot = props.dots[y][x];
-    return <Dot width={sideLength} height={sideLength} x={sideLength * x} y={sideLength * y} fill={dot.lighting ? "#ff0000" : "#ffffff"} stroke="#000000" onClick={() => props.onClick(x, y)} />;
+  function renderDot (i) {
+    const dot = props.dots[i];
+    const row = Math.floor(i / columns);
+    const column = i % columns;
+    return <Dot width={sideLength} height={sideLength} x={sideLength * column} y={sideLength * row} fill={dot.lighting ? "#ff0000" : "#ffffff"} stroke="#000000" onClick={() => props.onClick(i)} />;
   };
 
   function renderAllDot() {
     // TODO listをpropsから取得する
-    const list = [{row: 0, column: 0}, {row: 0, column: 1}, {row: 1, column: 0}, {row: 1, column: 1}];
-    return list.map(e => renderDot(e.column, e.row));
+    return props.dots.map((dot, index) => renderDot(index));
   }
 
   return (
@@ -35,13 +37,13 @@ class Board extends React.Component {
     const dot = {lighting: false, };
 
     this.state = {
-      dots: Array(2).fill().map(() => Array(2).fill().map(() => Object.assign({}, dot))),
+      dots: Array(4).fill().map(() => Object.assign({}, dot)),
     };
   }
 
-  handleClick = (x, y) => {
+  handleClick = (i) => {
     const dots = this.state.dots.slice();
-    dots[y][x].lighting = !dots[y][x].lighting
+    dots[i].lighting = !dots[i].lighting
     this.setState({dots: dots})
   };
 
