@@ -9,7 +9,7 @@ function Dot(props) {
 
 function Display(props) {
   const sideLength = 100;
-  const columns = 2;
+  const columns = 26;
 
   function renderDot (i) {
     const dot = props.dots[i];
@@ -37,7 +37,7 @@ class Board extends React.Component {
     const dot = {lighting: false, };
 
     this.state = {
-      dots: Array(4).fill().map(() => Object.assign({}, dot)),
+      dots: Array(21 * 26).fill().map(() => Object.assign({}, dot)),
     };
   }
 
@@ -49,7 +49,7 @@ class Board extends React.Component {
 
   render() {
     return (
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="2600" height="2100">
         <Display dots={this.state.dots} onClick={this.handleClick}/>
       </svg>
     );
