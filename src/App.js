@@ -39,6 +39,20 @@ class Board extends React.Component {
     this.state = {
       dots: Array(21 * 26).fill().map(() => Object.assign({}, dot)),
     };
+
+    this.boardProps = {
+      viewBox: {
+        x: 0,
+        y: 0,
+        height: 520,
+        width: 420,
+      },
+      // 個数を表すいい英語を名づける
+      size: {
+        rows: 21,
+        columns: 26,
+      },
+    };
   }
 
   handleClick = (i) => {
