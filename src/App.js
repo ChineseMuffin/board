@@ -59,8 +59,8 @@ class Board extends React.Component {
       viewBox: {
         x: 0,
         y: 0,
-        height: 520,
-        width: 420,
+        width:  520,
+        height: 420,
       },
       // 個数を表すいい英語を名づける
       size: {
