@@ -8,14 +8,29 @@ function Dot(props) {
 }
 
 function Display(props) {
-  const sideLength = 100;
-  const columns = 26;
+  const x      = props.viewBox.x;
+  const y      = props.viewBox.y;
+  const width  = props.viewBox.width;
+  const height = props.viewBox.height;
+  
+  const columns = props.size.columns;
+  const rows    = props.size.rows;
+
+  const dotWidth  = width  / columns;
+  const dotHeight = height / rows;
 
   function renderDot (i) {
     const dot = props.dots[i];
     const row = Math.floor(i / columns);
     const column = i % columns;
-    return <Dot width={sideLength} height={sideLength} x={sideLength * column} y={sideLength * row} fill={dot.lighting ? "#ff0000" : "#ffffff"} stroke="#000000" onClick={() => props.onClick(i)} />;
+    return (
+      <Dot
+        width={dotWidth} height={dotHeight}
+        x={x + dotWidth * column} y={y + dotHeight * row}
+        fill={dot.lighting ? "#ff0000" : "#ffffff"} stroke="#000000"
+        onClick={() => props.onClick(i)} 
+      />
+    );
   };
 
   function renderAllDot() {
@@ -64,7 +79,12 @@ class Board extends React.Component {
   render() {
     return (
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="2600" height="2100">
-        <Display dots={this.state.dots} onClick={this.handleClick}/>
+        <Display
+          dots={this.state.dots}
+          viewBox={this.boardProps.viewBox}
+          size={this.boardProps.size}
+          onClick={this.handleClick}
+        />
       </svg>
     );
   }
