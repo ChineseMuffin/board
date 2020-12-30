@@ -42,11 +42,6 @@ function Display(props) {
 class Board extends React.Component {
   constructor(props) {
     super(props);
-    const dot = {lighting: false};
-
-    this.state = {
-      dots: Array(21 * 26).fill().map(() => Object.assign({}, dot)),
-    };
 
     this.boardProps = {
       viewBox: {
@@ -61,6 +56,12 @@ class Board extends React.Component {
         columns: 26,
       },
     };
+
+    const dot = {lighting: false};
+    this.state = {
+      dots: Array(this.boardProps.size.rows * this.boardProps.size.columns).fill().map(() => Object.assign({}, dot)),
+    };
+
   }
 
   handleClick = (i) => {
