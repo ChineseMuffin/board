@@ -8,13 +8,8 @@ function Dot(props) {
 }
 
 function Display(props) {
-  const x      = props.viewBox.x;
-  const y      = props.viewBox.y;
-  const width  = props.viewBox.width;
-  const height = props.viewBox.height;
-  
-  const columns = props.size.columns;
-  const rows    = props.size.rows;
+  const {x, y, width, height} = props.viewBox;
+  const {columns, rows} = props.size;
 
   const dotWidth  = width  / columns;
   const dotHeight = height / rows;
@@ -34,7 +29,6 @@ function Display(props) {
   };
 
   function renderAllDot() {
-    // TODO listをpropsから取得する
     return props.dots.map((dot, index) => renderDot(index));
   }
 
@@ -46,10 +40,9 @@ function Display(props) {
 }
 
 class Board extends React.Component {
-  // TODO ドットを複製する
   constructor(props) {
     super(props);
-    const dot = {lighting: false, };
+    const dot = {lighting: false};
 
     this.state = {
       dots: Array(21 * 26).fill().map(() => Object.assign({}, dot)),
